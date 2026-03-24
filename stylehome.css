@@ -1,0 +1,1164 @@
+/* --- CONFIGURACIÓN GENERAL --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Rajdhani:wght@600;700&display=swap');
+
+:root {
+    --primary-blue: #0a1a35;
+    --accent-red: #e31e24;
+    --lime-green: #e31e24; /* Verde Lima real para enfoque tecnológico */
+    --yellow-gold: #f1c40f;
+    --white: #ffffff;
+    --text-dark: #333333;
+    --gray-bg: #f4f4f4;
+    --dropdown-bg: #e0e0e0; /* Gris claro para el submenú según tu imagen */
+}
+
+* {
+    margin: 0; 
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- CABECERA --- */
+header {
+    background: var(--primary-blue);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 15px 0; /* Aumentado de 10px a 15px para darle altura */
+    border-bottom: 3px solid var(--lime-green);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3); /* Sombra para dar profundidad */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px; /* Aumentado de 1200px a 1400px para amplitud */
+    margin: 0 auto;
+    padding: 0 40px; /* Más espacio a los costados */
+}
+
+.logo img { 
+    height: 75px; /* Aumentado de 60px a 75px para mayor presencia */
+    width: auto;
+    transition: 0.3s;
+}
+
+/* --- NAVEGACIÓN Y DROPDOWN --- */
+.nav-links { 
+    display: flex; 
+    list-style: none; 
+    align-items: center;
+}
+
+.nav-links li {
+    position: relative; /* Necesario para posicionar el submenú */
+}
+
+.nav-links li a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem; /* Aumentado de 0.85rem a 0.95rem */
+    padding: 10px 18px; /* Espaciado interno más equilibrado */
+    text-transform: uppercase;
+    transition: 0.3s;
+    display: block;
+    letter-spacing: 0.8px; /* Mejora la legibilidad de las mayúsculas */
+}
+.nav-links li a:hover {
+    color: var(--lime-green);
+    transform: translateY(-2px); /* Pequeño efecto de elevación */
+}
+.nav-links li a.active { 
+    color: var(--lime-green); 
+}
+
+/* Estilos específicos del submenú (Dropdown) */
+.dropdown-content {
+    display: none; /* Oculto por defecto */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--dropdown-bg);
+    min-width: 240px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1200;
+    list-style: none;
+    padding: 10px 0;
+    border-top: 3px solid var(--lime-green);
+    opacity: 0;
+transition: all 0.3s ease; /* Esto suaviza la aparición */}
+
+.dropdown-content.active {
+    opacity: 1;
+}
+
+.dropdown-content li a {
+    color: var(--primary-blue) !important; /* Texto azul oscuro como en tu referencia */
+    padding: 12px 20px !important;
+    text-transform: none !important; /* Texto normal (no mayúsculas) */
+    font-weight: 600;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.dropdown-content li a:hover {
+    background-color: #d4d4d4;
+    color: var(--accent-red) !important;
+    padding-left: 25px !important; /* Efecto de desplazamiento */
+}
+
+/* Mostrar el submenú al pasar el mouse */
+.nav-links li.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.btn-nav-phone {
+    background: var(--accent-red);
+    color: var(--white);
+    padding: 14px 20px; /* Espaciado interno equilibrado */
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2; /* Evita que las líneas se peguen */
+    transition: all 0.3s ease;
+    min-width: 250px; /* Asegura que el número no se corte */
+    text-align: center;
+}
+
+.btn-nav-phone:hover {
+    background: var(--white);
+    color: var(--accent-red);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.btn-nav-phone span {
+    display: block;
+    font-size: 1rem;
+}
+
+/* --- HERO SLIDER --- */
+.hero-slider { position: relative; height: 100vh; overflow: hidden; background: #000; }
+.slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.slide.active { opacity: 1; visibility: visible; z-index: 10; }
+.slide-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1);
+    transition: transform 6s ease;
+}
+.slide.active .slide-bg { transform: scale(1.1); }
+
+.slide-content { position: relative; z-index: 20; text-align: center; color: white; max-width: 1000px; padding: 0 20px; }
+.top-tag { font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; letter-spacing: 3px; margin-bottom: 10px; display: block; }
+.slide-content h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; text-transform: uppercase; margin-bottom: 30px; line-height: 1.1; }
+.highlight { color: var(--lime-green); }
+
+.hero-btns { display: flex; gap: 15px; justify-content: center; }
+.btn-more, .btn-contact {
+    padding: 15px 35px;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+.btn-more { background: var(--lime-green); color: #000; }
+.btn-contact { background: var(--white); color: #000; }
+.btn-more:hover, .btn-contact:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+
+/* --- ESTADÍSTICAS --- */
+.stats-bar { background: var(--primary-blue); padding: 50px 0; color: white; border-bottom: 5px solid var(--lime-green); }
+.stats-flex { display: flex; justify-content: space-around; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; }
+.stat-item { text-align: center; flex: 1; min-width: 250px; padding: 20px; }
+.stat-item i { color: var(--lime-green); font-size: 2.5rem; margin-bottom: 10px; }
+.stat-number { font-size: 3rem; font-weight: 800; display: block; font-family: 'Rajdhani', sans-serif; }
+
+/* --- SECCIÓN NOSOTROS --- */
+.about-section { padding: 100px 5%; background: var(--white); }
+.about-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.about-img-container { position: relative; max-width: 500px; width: 100%; }
+.about-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 20px 20px 0 var(--primary-blue);
+    display: block;
+    object-fit: cover;
+}
+.about-text h2 { font-size: 2.5rem; margin-bottom: 20px; }
+.experience-text { color: var(--accent-red); font-weight: 800; margin-bottom: 10px; }
+
+/* --- PILARES Y SERVICIOS (MODIFICADO PARA QUITAR ESPACIO) --- */
+
+.pillars-section { 
+    padding: 30px 5%; /* Reducido de 80px a 30px: esto quita el espacio arriba y abajo de la sección */
+    background: var(--gray-bg); 
+}
+
+.pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px; /* Reducido de 30px a 15px: junta más los cuadros entre sí */
+    max-width: 1100px; /* Un poco más estrecho para que se vea más centrado */
+    margin: 0 auto;
+}
+
+.pillar-card {
+    background: var(--white);
+    padding: 20px 15px; /* Reducido de 40px a 20px: los cuadros blancos serán menos altos */
+    text-align: center;
+    transition: 0.4s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.pillar-icon { 
+    font-size: 2.5rem; /* Icono un poco más pequeño para ahorrar espacio */
+    color: var(--primary-blue); 
+    margin-bottom: 10px; /* Reducido de 20px a 10px: pega el icono al texto */
+    transition: 0.3s; 
+}
+
+.pillar-line { 
+    width: 30px; 
+    height: 3px; 
+    background: var(--lime-green); 
+    margin: 10px auto 0; /* Menos margen arriba de la línea roja */
+}
+
+/* --- SECCIÓN PROYECTOS (GALLERY) --- */
+.gallery-section { padding: 80px 0; background: var(--primary-blue); color: white; overflow: hidden; }
+.gallery-header { margin-bottom: 40px; padding: 0 5%; }
+.gallery-title h2 { font-size: 2.5rem; font-weight: 800; text-transform: uppercase; }
+.title-line { width: 60px; height: 4px; background: var(--lime-green); margin-top: 5px; }
+
+/* --- ANIMACIÓN DEL PORTAFOLIO --- */
+/* --- PORTAFOLIO ANIMADO SIN FIN --- */
+.gallery-slider-wrapper {
+    width: 100%;
+    overflow: hidden; /* Oculta lo que sale de la pantalla */
+    position: relative;
+    padding: 20px 0;
+}
+
+.gallery-track {
+    display: flex;
+    gap: 20px;
+    width: max-content; /* Permite que el contenido sea tan largo como sea necesario */
+    animation: scrollInfinito 40s linear infinite; /* 'linear' es vital para que no se detenga */
+}
+
+/* Detener al pasar el mouse para que el usuario pueda ver el proyecto */
+.gallery-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scrollInfinito {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Se mueve exactamente hasta la mitad */
+        /* Como el JS duplicó los elementos, la mitad se ve igual al inicio */
+        transform: translateX(-50%);
+    }
+}
+.gallery-item {
+    position: relative; 
+    width: 320px; /* Tamaño fijo para evitar saltos */
+    height: 420px; 
+    overflow: hidden; 
+    flex-shrink: 0; /* Evita que las imágenes se aplasten */
+    display: block;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10, 26, 53, 0.9) 15%, transparent 85%);
+    display: flex;
+    align-items: flex-end;
+    padding: 25px;
+    opacity: 0; /* Escondido por defecto */
+    transition: opacity 0.4s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1; /* Aparece suavemente al pasar el mouse */
+}
+.overlay-text span {
+    display: inline-block; /* Fundamental para aplicar el margen inferior */
+    color: var(--white);
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    border: 1px solid var(--accent-red); /* Recuadro rojo decorativo */
+    padding: 6px 14px;
+    margin-bottom: 18px; /* SEPARACIÓN DEL TÍTULO SOLICITADA */
+    letter-spacing: 1.5px;
+}
+
+.overlay-text p {
+    color: var(--white);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-item:hover img { transform: scale(1.1); }
+
+/* --- ESTADÍSTICAS --- */
+.stats-bar { background: var(--primary-blue); padding: 50px 0; color: white; border-bottom: 5px solid var(--lime-green); }
+.stats-flex { display: flex; justify-content: space-around; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; }
+.stat-item { text-align: center; flex: 1; min-width: 250px; padding: 20px; }
+.stat-item i { color: var(--lime-green); font-size: 2.5rem; margin-bottom: 10px; }
+.stat-number { font-size: 3rem; font-weight: 800; display: block; font-family: 'Rajdhani', sans-serif; }
+
+/* --- SECCIÓN CLIENTES --- */
+.clients-section { padding: 60px 0; background-color: var(--white); overflow: hidden; }
+.clients-title { padding: 0 5%; margin-bottom: 30px; }
+.clients-slider { width: 100%; overflow: hidden; position: relative; padding: 20px 0; }
+.clients-track {
+    display: flex;
+    width: max-content;
+    animation: scrollClients 30s linear infinite;
+}
+.clients-track img {
+    width: 200px;
+    height: 80px;
+    object-fit: contain;
+    margin: 0 40px;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: 0.3s;
+}
+.clients-track img:hover { filter: grayscale(0%); opacity: 1; }
+
+@keyframes scrollClients {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* --- FOOTER --- */
+footer { background: #050c1a; color: #adb5bd; padding: 80px 0 0; }
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+}
+.footer-logo { height: 70px; margin-bottom: 20px; }
+footer h4 { color: white; margin-bottom: 25px; border-left: 4px solid var(--lime-green); padding-left: 15px; }
+.social-links { display: flex; gap: 10px; margin-top: 20px; }
+.social-links a {
+    width: 40px; height: 40px; background: #333; color: white;
+    display: flex; align-items: center; justify-content: center; border-radius: 50%;
+    transition: 0.3s;
+}
+.social-links a:hover { background: var(--lime-green); color: #000; }
+
+.footer-bottom {
+    background: var(--lime-green);
+    color: #000;
+    text-align: center;
+    padding: 25px;
+    font-weight: 800;
+}
+
+@media (max-width: 768px) {
+    .gallery-track {
+        animation-duration: 25s; /* Un poco más rápido en móvil para mejor experiencia */
+    }
+    
+    .gallery-item {
+        width: 260px; /* Un poco más pequeñas en pantallas chicas */
+        height: 350px;
+    }
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 992px) {
+    .nav-links { display: none; } /* Ocultar para menú hamburguesa futuro */
+    .about-flex { flex-direction: column; text-align: center; }
+    .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+    .pillars-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+}
+
+
+/* --- SECCIÓN PERSONALIZADA (FONDO TOTAL - CONTENIDO CENTRADO) --- */
+.custom-features {
+    padding: 100px 0;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Evita scrolls accidentales por animaciones */
+}
+
+/* Oscurecemos el fondo para que resalte el contenido */
+.custom-features::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75); 
+    z-index: 1;
+}
+
+.container {
+    max-width: 1200px; /* Ajusta este valor al ancho de tu diseño */
+    margin: 0 auto;    /* Centra el bloque */
+    padding: 0 20px;   /* Evita que toque los bordes en tablets/móviles */
+    width: 100%;
+}
+
+.custom-features .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.features-flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+}
+
+/* --- ANIMACIONES DE ENTRADA --- */
+
+/* Bloque Izquierdo (Dibujo y Slogan) */
+.features-image-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: fadeInLeft 1.2s ease-out forwards; /* Entrada desde la izquierda */
+}
+
+.img-dibujo {
+    max-width: 100%;
+    height: auto;
+    width: 380px;
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.6));
+    animation: floatAnimation 3s ease-in-out infinite; /* Flotado constante */
+}
+
+.company-slogan {
+    color: var(--white);
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-top: 25px;
+    line-height: 1.2;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.5s forwards; /* Aparece con retraso */
+}
+
+/* Bloque Derecho (Tarjetas) */
+.features-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Animación individual para cada tarjeta con retraso escalonado */
+.feature-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 6px solid var(--accent-red);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0;
+    animation: fadeInRight 0.8s ease-out forwards;
+}
+
+.feature-card:nth-child(1) { animation-delay: 0.3s; }
+.feature-card:nth-child(2) { animation-delay: 0.6s; }
+.feature-card:nth-child(3) { animation-delay: 0.9s; }
+
+.feature-card:hover {
+    transform: translateX(15px) scale(1.02);
+    background: #ffffff;
+    box-shadow: 5px 15px 30px rgba(227, 30, 36, 0.2); /* Sutil brillo rojo */
+}
+
+/* --- KEYFRAMES (DEFINICIÓN DE ANIMACIONES) --- */
+
+/* Flotado suave del dibujo */
+@keyframes floatAnimation {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(1deg); }
+}
+
+/* Entrada desde la izquierda */
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Entrada desde la derecha */
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Aparecer suavemente */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 992px) {
+    .features-flex-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .img-dibujo { width: 280px; }
+    .feature-card:hover { transform: translateY(-5px); } /* Cambio de hover en móvil */
+}
+
+/* --- ESTILO DEL MENÚ MÓVIL --- */
+/* Estilo base para el botón (oculto en PC) */
+.menu-toggle {
+    display: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    order: 2; /* Lo posiciona al centro/derecha */
+}
+
+@media (max-width: 992px) {
+    .navbar {
+        padding: 10px 15px;
+        position: relative;
+    }
+
+    .menu-toggle {
+        display: block; /* Aparece en móvil */
+    }
+
+    .logo {
+        order: 1;
+    }
+
+    .nav-extra {
+        order: 3;
+    }
+
+    /* Ocultamos el texto largo del teléfono en móviles pequeños */
+    .phone-text {
+        display: none;
+    }
+
+    .btn-nav-phone {
+        padding: 10px;
+        border-radius: 50%; /* Botón circular rojo como en tu imagen */
+    }
+
+    /* MENÚ DESPLEGABLE ESTILO ROAN */
+    .nav-links {
+        display: none; /* Se oculta inicialmente */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #0a1a35; /* Azul oscuro profundo */
+        padding: 0;
+        z-index: 1000;
+        border-bottom: 4px solid var(--accent-red);
+    }
+
+    .nav-links.active {
+        display: flex; /* Se muestra al hacer click */
+    }
+
+    .nav-links li {
+        width: 100%;
+        border-bottom: 1px solid rgba(250, 250, 250, 0.1);
+    }
+
+    .nav-links li a {
+        padding: 20px;
+        text-align: center;
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    /* Ajuste Dropdown en Móvil */
+  .dropdown-content {
+    min-width: 280px; /* Más ancho para que el texto no se amontone */
+    background-color: #f8f9fa; /* Un gris muy claro casi blanco */
+}
+.dropdown-content li a {
+    font-size: 1rem !important; /* Letra un poco más grande en el submenú */
+    padding: 15px 25px !important;
+}
+
+    .dropdown.active .dropdown-content {
+        display: block;
+        opacity: 1;
+    }
+}
+
+/* --- ESTILO DEL BOTÓN HAMBURGUESA --- */
+.menu-toggle {
+    display: none; /* Oculto en PC */
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    order: 2;
+}
+
+/* --- RESPONSIVE MÓVIL --- */
+/* --- RESPONSIVE MÓVIL (Lógica de Navegación) --- */
+@media (max-width: 992px) {
+    /* 1. Ajuste Navbar */
+    .navbar {
+        padding: 10px 15px;
+        position: relative;
+    }
+
+    .menu-toggle {
+        display: block; /* Mostrar hamburguesa */
+        order: 2;
+    }
+
+    .logo { order: 1; }
+    /* Contenedor del botón a la derecha */
+.nav-extra {
+    display: flex;
+    align-items: center;
+    margin-left: 20px; /* Separación de los links */
+}
+
+    /* 2. El Menú que baja */
+    .nav-links {
+        display: none; /* JS lo activa con .active */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--primary-blue);
+        border-top: 2px solid var(--accent-red);
+        z-index: 2000;
+        padding: 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* 3. El botón del Dropdown (El que recibe los clicks) */
+    .nav-links li.dropdown {
+        width: 100%;
+    }
+
+    /* Desactivar el hover de PC en móvil para que no se abra solo */
+    .nav-links li.dropdown:hover .dropdown-content {
+        display: none;
+    }
+
+    /* 4. El contenido del Submenú */
+    .dropdown-content {
+        position: static; /* Importante para que empuje el contenido hacia abajo */
+        display: none; 
+        width: 100%;
+        background: rgba(0, 0, 0, 0.3); /* Fondo oscuro para diferenciar */
+        opacity: 1; /* Reset de la opacidad de PC */
+        box-shadow: none;
+        border-top: none;
+        padding: 0;
+    }
+
+    /* Clase activada por el JS (Un click) */
+    .dropdown.active .dropdown-content {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+
+    .dropdown-content li a {
+        color: var(--white) !important; /* Texto blanco para legibilidad sobre azul */
+        padding: 15px 40px !important; /* Sangría a la derecha */
+        text-align: left;
+        font-size: 0.9rem;
+    }
+
+    .dropdown-content li a:hover {
+        background: var(--accent-red);
+        color: white !important;
+    }
+
+    /* Rotación de la flecha */
+    .fa-chevron-down {
+        transition: transform 0.3s ease;
+    }
+
+    /* 5. Otros ajustes de sección */
+    .about-flex { flex-direction: column; text-align: center; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; text-align: center; }
+}
+
+/* Animación de bajada suave */
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+
+
+
+
+/* --- CONTENEDOR PRINCIPAL FLOTANTE --- */
+#chat-container {
+    position: fixed;
+    bottom: 85px; /* Separación del botón flotante */
+    right: 20px;
+    width: 300px;  /* Más angosto */
+    height: 420px; /* Más bajo */
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    z-index: 9999;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* Reducir el tamaño de las pestañas para que no se vean gigantes */
+.chat-tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+}
+
+/* --- BOTÓN CIRCULAR ROJO --- */
+#chat-widget-button {
+    position: fixed !important;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--accent-red); /* Usa tu variable roja */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+#chat-widget-button:hover { 
+    transform: scale(1.1); 
+}
+
+/* --- PESTAÑAS (TABS) --- */
+.chat-tabs {
+    display: flex;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: 700;
+    color: #666;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.tab-btn.active {
+    color: var(--primary-blue);
+    border-bottom: 3px solid var(--accent-red);
+}
+
+/* --- CONTENIDO DE LAS PESTAÑAS --- */
+.tab-content { 
+    display: none; 
+    flex: 1; /* Esto hace que ocupe TODO el espacio restante debajo de las pestañas */
+    overflow: hidden; /* Evita scrolls dobles raros */
+    background: #fff;
+    flex-direction: column; /* Importante para que el input quede abajo */
+}
+
+.tab-content.active { 
+    display: flex; 
+}
+
+/* --- ÁREA DE MENSAJES (CHAT BOX) --- */
+#chat-box {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #fcfcfc;
+}
+
+/* Estilo de burbujas */
+.msg-user {
+    align-self: flex-end;
+    background: var(--accent-red);
+    color: white;
+    padding: 10px 14px;
+    border-radius: 15px 15px 0 15px;
+    max-width: 80%;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.msg-bot {
+    align-self: flex-start;
+    background: #f1f1f1;
+    color: #333;
+    padding: 10px 14px;
+    border-radius: 15px 15px 15px 0;
+    max-width: 80%;
+    font-size: 0.9rem;
+}
+
+/* --- INPUT DE TEXTO --- */
+.chat-input-area {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px; /* Reducimos un poco el padding */
+    border-top: 1px solid #eee;
+    background: white;
+    margin-top: auto; /* Empuja el input siempre al final del contenedor */
+}
+
+.chat-input-area input {
+    flex: 1;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 25px;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+/* --- LISTA DE PREGUNTAS (FAQ) --- */
+.faq-list { 
+    padding: 15px; 
+    overflow-y: auto; 
+}
+
+.faq-item { 
+    margin-bottom: 10px; 
+    padding: 12px; 
+    background: #f8f9fa; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    border-left: 4px solid var(--accent-red);
+    transition: 0.2s;
+}
+
+.faq-item:hover {
+    background: #f1f1f1;
+}
+
+.faq-ans { 
+    display: none; 
+    padding-top: 8px; 
+    font-size: 0.85rem; 
+    color: #555; 
+    line-height: 1.4;
+}
+
+/* Contenedor de los botones de opciones */
+.chat-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* Estilo de cada botón de opción */
+.chat-options button {
+    background: white;
+    border: 2px solid #e31e24; /* Rojo ROAN */
+    color: #0a1a35;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: 0.3s;
+    text-align: left;
+}
+
+.chat-options button:hover {
+    background: #e31e24;
+    color: white;
+}
+.tab-content {
+    display: none !important; /* Oculta todo por defecto */
+}
+
+.tab-content.active {
+    display: flex !important; /* Muestra solo el activo */
+}
+
+
+/* Estilos para la cabecera del chat */
+.chat-header {
+    background-color: #e31e24; /* El rojo de tu marca */
+    color: white;
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px 15px 0 0; /* Redondeado superior */
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.close-chat {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.close-chat:hover {
+    transform: scale(1.2); /* Efecto al pasar el mouse */
+}
+
+/* Estado minimizado: solo muestra la barra roja */
+#chat-container.minimized {
+    height: 40px !important; 
+    bottom: 85px !important; /* Lo subimos para que no tape el botón circular */
+    overflow: hidden;
+    width: 200px; /* Opcional: puedes hacerlo más angosto al minimizar */
+}
+
+/* Transición suave para que no sea un salto brusco */
+#chat-container {
+    /* ... tus otros estilos ... */
+    transition: height 0.3s ease, bottom 0.3s ease, opacity 0.3s ease;
+}
+
+/* Estilo para los botones del header */
+.close-chat {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s;
+}
+
+.close-chat:hover {
+    opacity: 0.7;
+}
+
+
+
+
+
+/* --- ESTILOS DE LA TOP BAR --- */
+.top-bar {
+    background-color: #0a1a35; /* O el color de tu marca */
+    color: white;
+    padding: 10px 0;
+    font-size: 14px;
+    width: 100%;
+    z-index: 1001; /* Mayor que el header para que no haya saltos */
+}
+.top-bar-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-bar-contact i {
+    color: #e31e24; /* Rojo ROAN para los iconos */
+    margin-right: 5px;
+}
+
+.top-bar-contact .separator {
+    margin: 0 10px;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.top-bar-socials a {
+    color: #ffffff;
+    margin-left: 15px;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+body {
+    padding-top: 0; 
+}
+
+.top-bar-socials a:hover {
+    color: #e31e24; /* Cambio a rojo al pasar el mouse */
+}
+
+
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Oculto por defecto en móvil */
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Aparece justo debajo del header */
+        left: 0;
+        width: 100%;
+        background-color: #001529; /* Color oscuro de ROAN */
+        padding: 20px;
+        z-index: 1000;
+    }
+
+    /* Esta es la clase que añade el JS */
+    .nav-links.active {
+        display: flex; 
+    }
+
+    .menu-toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: white;
+    }
+}
+
+
+/* --- ESTO ES LO QUE HACE QUE LAS 3 LÍNEAS FUNCIONEN --- */
+
+@media (max-width: 992px) {
+    /* 1. El menú oculto por defecto */
+    .nav-links {
+        display: none; 
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Para que aparezca debajo del logo */
+        left: 0;
+        width: 100%;
+        background-color: #0a1a35; /* Ajusta al color de tu header */
+        z-index: 999;
+        padding: 20px;
+    }
+
+    /* 2. LA CLAVE: Cuando el JS activa el menú */
+    .nav-links.active {
+        display: flex !important;
+    }
+
+    /* 3. El submenú de Experiencia en Obras */
+    .dropdown-content {
+        display: none;
+        position: static; /* Para que empuje el contenido hacia abajo */
+        background-color: rgba(255,255,255,0.05);
+        width: 100%;
+    }
+
+    /* 4. Cuando el JS activa el submenú */
+    .dropdown.active .dropdown-content {
+        display: block !important;
+    }
+
+    /* Asegurar que el botón de las 3 líneas sea visible */
+    .menu-toggle {
+        display: block !important;
+        cursor: pointer;
+    }
+}
+
+
+
