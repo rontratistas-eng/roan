@@ -382,11 +382,14 @@ transition: all 0.3s ease; /* Esto suaviza la aparición */}
 footer { background: #050c1a; color: #adb5bd; padding: 80px 0 0; }
 .footer-grid {
     display: grid;
-    grid-template-columns: 1.2fr 1fr 1fr;
-    gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px 60px;
+    /* Esto distribuye las columnas ocupando el espacio proporcionalmente */
+    grid-template-columns: 1.4fr 0.8fr 0.8fr 1.2fr; 
+    /* Esta es la clave para centrar el grupo de columnas */
+    justify-content: center; 
+    gap: 60px; 
+    max-width: 1400px;
+    margin: 0 auto; /* Centra el contenedor principal */
+    padding: 0 40px;
 }
 .footer-logo { height: 70px; margin-bottom: 20px; }
 footer h4 { color: white; margin-bottom: 25px; border-left: 4px solid var(--lime-green); padding-left: 15px; }
@@ -1162,3 +1165,158 @@ body {
 
 
 
+/* --- FOOTER ESTILO MAUSAA --- */
+.main-footer {
+    background-color: #0c0c0c;
+    color: #ffffff;
+    padding: 80px 0 40px; /* Más espacio abajo para que no termine brusco */
+    font-family: 'Montserrat', sans-serif; /* Usamos tu fuente principal */
+    border-top: 5px solid var(--accent-red); 
+}
+
+.footer-grid {
+    display: grid;
+    /* Ajustamos proporciones: la 1ra y 4ta columna son más anchas que las del medio */
+    grid-template-columns: 1.4fr 0.8fr 0.8fr 1.2fr; 
+    gap: 60px; /* Aumentamos el GAP de 40px a 60px para que NO se vea apretado */
+    max-width: 1400px; /* IGUAL QUE TU NAVBAR para mantener simetría */
+    margin: 0 auto;
+    padding: 0 40px;
+}
+/* Opcional: Centrar el texto de los títulos y líneas si sientes que siguen muy a la izquierda */
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Mantener alineación a la izquierda interna */
+}
+
+.footer-col h3, .footer-logo {
+font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: var(--white);
+}
+
+.footer-divider {
+    width: 35px;
+    height: 3px;
+    background-color: var(--accent-red);
+    margin-bottom: 25px; /* Espacio entre la línea y el texto */
+}
+
+.footer-col p {
+    color: #b0b0b0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+/* Redes Sociales */
+.footer-socials {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-socials a {
+    width: 38px;
+    height: 38px;
+    background: rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-socials a:hover {
+    background: #e31e24;
+    transform: translateY(-3px);
+}
+
+/* Enlaces y Listas */
+.footer-links, .footer-contact {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #b0b0b0;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-links a i {
+    font-size: 0.7rem;
+    color: #e31e24;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+    padding-left: 5px;
+}
+
+/* Contacto */
+.footer-contact li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #b0b0b0;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+.footer-contact li i {
+    color: #e31e24;
+    width: 20px;
+}
+
+/* Parte Inferior */
+.footer-bottom {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    color: #666;
+    font-size: 0.85rem;
+}
+
+/* --- RESPONSIVIDAD --- */
+@media (max-width: 992px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .footer-divider {
+        margin: 0 auto 25px;
+    }
+    
+    .footer-socials {
+        justify-content: center;
+    }
+    
+    .footer-links a {
+        justify-content: center;
+    }
+    
+    .footer-contact li {
+        justify-content: center;
+    }
+}
