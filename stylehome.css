@@ -1320,3 +1320,59 @@ font-size: 1.2rem;
         justify-content: center;
     }
 }
+
+
+/* --- AJUSTE PARA FOOTER ESPACIOSO --- */
+#contacto {
+    background-color: #0a1a35; /* El azul oscuro de ROAN */
+    padding: 100px 0;         /* Mucho más espacio arriba y abajo */
+    border-top: 5px solid var(--accent-red);
+}
+
+#contacto .container {
+    max-width: 1400px;        /* Expandimos el ancho total */
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.footer-grid {
+    display: grid;
+    /* Ajustamos proporciones: el mapa (columna 2) puede ser un poco más grande */
+    grid-template-columns: 1.2fr 1.5fr 1.2fr; 
+    gap: 80px;                /* Gran separación entre las 3 columnas */
+    align-items: start;
+}
+
+.footer-about .footer-logo {
+    height: 80px;             /* Logo más grande */
+    margin-bottom: 20px;
+}
+
+.footer-grid h4 {
+    color: white;
+    font-size: 1.3rem;
+    margin-bottom: 25px;
+    border-left: 4px solid var(--accent-red);
+    padding-left: 15px;
+    text-transform: uppercase;
+}
+
+.footer-info p {
+    color: #adb5bd;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-info i {
+    color: var(--accent-red);
+}
+
+/* Hacer que el mapa ocupe bien su lugar */
+.map-container {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
