@@ -22,3 +22,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('imgFull');
+    const captionText = document.getElementById('caption');
+    const cards = document.querySelectorAll('.service-card');
+
+    cards.forEach(card => {
+        card.addEventListener('click', function() {
+            const img = this.querySelector('img');
+            const title = this.querySelector('h3').innerText;
+            
+            modal.style.display = "flex";
+            setTimeout(() => modal.classList.add('active'), 10);
+            modalImg.src = img.src;
+            captionText.innerHTML = title;
+        });
+    });
+
+    // Cerrar al hacer clic en la X o fuera de la imagen
+    modal.onclick = function() {
+        modal.classList.remove('active');
+        setTimeout(() => modal.style.display = "none", 300);
+    };
+});
